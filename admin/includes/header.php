@@ -10,18 +10,23 @@
 
 <body style="background:#F5F2EB;">
 
-<nav class="navbar navbar-dark bg-dark px-4">
+<nav class="navbar navbar-dark bg-dark ">
 
-    <a class="navbar-brand" href="dashboard.php">
+    <a class="navbar-brand fw-bold" href="dashboard.php">
         Fashion Admin
     </a>
-
-    <a href="logout.php" class="btn btn-danger btn-sm">
-        Logout
+   <ul class="flex gap-4 text-end accordion">
+    <a href="dashboard.php" class="btn btn-primary text-end bt-sm ">
+        Home
     </a>
 
-    <a href="products.php" class="btn btn-warning btn-sm me-2">
+    <a href="products.php" class="btn btn-warning text-end btn-sm ">
     Products
      </a>
+
+      <a href="logout.php" class="btn btn-danger  text-end btn-sm">
+        Logout
+     </a>
+</ul>
 
 </nav>

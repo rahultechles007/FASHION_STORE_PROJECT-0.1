@@ -1,4 +1,10 @@
 <?php
+$message = "";
+
+if(isset($_GET['deleted']))
+{
+    $message = "Product deleted successfully!";
+}
 
 session_start();
 include(__DIR__ . "/../config/db.php");
@@ -15,6 +21,12 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY product_id DESC")
 
 ?>
 
+<style>
+    .btn-action{
+            min-width:70px;
+        }
+</style>
+
 <div class="container py-5">
 
     <div class="d-flex justify-content-between mb-4">
@@ -30,7 +42,11 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY product_id DESC")
     <div class="card shadow border-0">
 
         <div class="card-body table-responsive">
-
+                <?php if($message != "") { ?>
+                <div class="alert alert-danger">
+                <?php echo $message; ?>
+                </div>
+                 <?php } ?>
             <table class="table table-bordered align-middle">
 
                 <thead class="table-dark">
@@ -58,7 +74,7 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY product_id DESC")
                             <img src="../assets/images/products/<?php echo $row['image']; ?>" width="60">
                         </td>
 
-                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['product_name']; ?></td>
 
                         <td>₹<?php echo $row['price']; ?></td>
 
@@ -66,11 +82,11 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY product_id DESC")
 
                         <td>
 
-                            <a href="edit_product.php?id=<?php echo $row['product_id']; ?>" class="btn btn-warning btn-sm">
+                            <a href="edit_product.php?id=<?php echo $row['product_id']; ?>" class="btn btn-warning btn-sm btn-action">
                                 Edit
                             </a>
-
-                            <a href="delete_product.php?id=<?php echo $row['product_id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                        
+                            <a href="delete_product.php?id=<?php echo $row['product_id']; ?>" class="btn btn-danger btn-sm btn-action" onclick="return confirm('Are you sure?')">
                                 Delete
                             </a>
 
