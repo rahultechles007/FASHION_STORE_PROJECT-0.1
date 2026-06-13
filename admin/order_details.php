@@ -34,6 +34,14 @@ $items = mysqli_query($conn, "
 ");
 
 ?>
+<!-- showing success Message -->
+<?php if(isset($_GET['updated'])) { ?>
+    <div class="alert alert-success">
+        Order status updated successfully!
+    </div>
+<?php }
+
+?>
 
 <div class="container py-5">
 
@@ -46,6 +54,26 @@ $items = mysqli_query($conn, "
             <p>Phone: <?php echo $order['phone']; ?></p>
             <p>Address: <?php echo $order['address']; ?></p>
             <p>Total: ₹<?php echo $order['total_amount']; ?></p>
+
+              <!-- ADD STATUS BUTTONS HERE -->
+        <div class="mb-4">
+
+            <a href="update_order_status.php?id=<?php echo $order_id; ?>&status=Processing"
+               class="btn btn-warning btn-sm">
+                Mark Processing
+            </a>
+
+            <a href="update_order_status.php?id=<?php echo $order_id; ?>&status=Shipped"
+               class="btn btn-primary btn-sm">
+                Mark Shipped
+            </a>
+
+            <a href="update_order_status.php?id=<?php echo $order_id; ?>&status=Delivered"
+               class="btn btn-success btn-sm">
+                Mark Delivered
+            </a>
+
+        </div>
 
         </div>
     </div>

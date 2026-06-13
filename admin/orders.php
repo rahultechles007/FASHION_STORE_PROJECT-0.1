@@ -59,7 +59,29 @@ $result = mysqli_query($conn, "
 
                         <td>
                             <span class="badge bg-warning text-dark">
-                                <?php echo $row['status'] ?? 'Pending'; ?>
+                               <td>
+<!-- smart upgrade -->
+<?php
+$status = $row['status'] ?? 'Pending';
+
+if($status == "Pending") {
+    echo '<span class="badge bg-warning text-dark">Pending</span>';
+}
+elseif($status == "Processing") {
+    echo '<span class="badge bg-primary">Processing</span>';
+}
+elseif($status == "Shipped") {
+    echo '<span class="badge bg-secondary">Shipped</span>';
+}
+elseif($status == "Delivered") {
+    echo '<span class="badge bg-success">Delivered</span>';
+}
+else {
+    echo '<span class="badge bg-dark">'.$status.'</span>';
+}
+?>
+
+</td>
                             </span>
                         </td>
 
