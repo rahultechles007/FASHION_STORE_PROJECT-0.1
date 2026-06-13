@@ -1,6 +1,8 @@
 <?php
 
+session_start();
 include("config/db.php");
+include("includes/header.php");
 
 // Check if product ID exists
 if(!isset($_GET['id']))
@@ -25,6 +27,7 @@ if(mysqli_num_rows($productQuery) == 0)
 $product = mysqli_fetch_assoc($productQuery);
 
 //cart section 
+
 
 $message = "";
 
@@ -76,7 +79,7 @@ if(isset($_POST['add_to_cart']))
 }
 //cart section end 
 
-include("includes/header.php");
+
 
 ?>
 

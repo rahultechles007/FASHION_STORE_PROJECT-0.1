@@ -1,4 +1,10 @@
-<?php include("includes/header.php"); ?>
+<?php
+
+session_start();
+include("config/db.php");
+include("includes/header.php");
+
+?>
 
 <section class="container py-5">
 

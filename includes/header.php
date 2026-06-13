@@ -1,9 +1,31 @@
 <?php
-if(session_status() == PHP_SESSION_NONE){
+
+if(session_status() === PHP_SESSION_NONE)
+{
     session_start();
 }
-?>
 
+$cartCount = 0;
+
+if(isset($conn) && isset($_SESSION['user_id']))
+{
+    $uid = $_SESSION['user_id'];
+
+    $countQuery = mysqli_query(
+        $conn,
+        "SELECT SUM(quantity) AS total
+         FROM cart
+         WHERE user_id='$uid'"
+    );
+
+    if($countQuery)
+    {
+        $countData = mysqli_fetch_assoc($countQuery);
+        $cartCount = $countData['total'] ?? 0;
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +39,34 @@ if(session_status() == PHP_SESSION_NONE){
 </head>
 
 <body>
+    <?php
+
+if(session_status() === PHP_SESSION_NONE)
+{
+    session_start();
+}
+
+$cartCount = 0;
+
+if(isset($conn) && isset($_SESSION['user_id']))
+{
+    $uid = $_SESSION['user_id'];
+
+    $countQuery = mysqli_query(
+        $conn,
+        "SELECT SUM(quantity) AS total
+         FROM cart
+         WHERE user_id='$uid'"
+    );
+
+    if($countQuery)
+    {
+        $countData = mysqli_fetch_assoc($countQuery);
+        $cartCount = $countData['total'] ?? 0;
+    }
+}
+
+?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
@@ -44,8 +94,20 @@ if(session_status() == PHP_SESSION_NONE){
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="cart.php">Cart</a>
-    </li>
+    <a class="nav-link" href="cart.php">
+
+        Cart
+
+        <?php if($cartCount > 0){ ?>
+
+            <span class="badge bg-dark">
+                <?php echo $cartCount; ?>
+            </span>
+
+        <?php } ?>
+
+    </a>
+</li>
 
     <?php if(isset($_SESSION['user_id'])) { ?>
 
