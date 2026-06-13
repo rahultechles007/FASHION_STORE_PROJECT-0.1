@@ -46,7 +46,7 @@ if(isset($_POST['login']))
 <!DOCTYPE html>
 <html>
 <head>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Login</title>
 
     <meta charset="UTF-8">

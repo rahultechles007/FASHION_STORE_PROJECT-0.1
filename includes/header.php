@@ -92,6 +92,22 @@ if(isset($conn) && isset($_SESSION['user_id']))
     <li class="nav-item">
         <a class="nav-link" href="products.php">Products</a>
     </li>
+    <li class="nav-item dropdown">
+
+    <a class="nav-link dropdown-toggle"
+       data-bs-toggle="dropdown">
+        My Account
+    </a>
+
+    <ul class="dropdown-menu">
+
+        <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+        <li><a class="dropdown-item" href="wishlist.php">Wishlist</a></li>
+        <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+
+    </ul>
+
+</li>
 
     <li class="nav-item">
     <a class="nav-link" href="cart.php">
@@ -108,6 +124,7 @@ if(isset($conn) && isset($_SESSION['user_id']))
 
     </a>
 </li>
+
 
     <?php if(isset($_SESSION['user_id'])) { ?>
 

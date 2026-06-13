@@ -1,4 +1,6 @@
+
 <?php
+
 $message = "";
 
 if(isset($_GET['deleted']))
@@ -27,6 +29,11 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY product_id DESC")
         }
 </style>
 
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
 <div class="container py-5">
 
     <div class="d-flex justify-content-between mb-4">
@@ -38,6 +45,8 @@ $result = mysqli_query($conn, "SELECT * FROM products ORDER BY product_id DESC")
         </a>
 
     </div>
+    <!--seacrhbar-->
+    
 
     <div class="card shadow border-0">
 

@@ -45,7 +45,9 @@ $cartItems = mysqli_query(
 );
 
 ?>
-
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <div class="container py-5">
 
     <h1 class="fw-bold mb-4">

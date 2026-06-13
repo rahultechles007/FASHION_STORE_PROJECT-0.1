@@ -74,6 +74,9 @@ if(isset($_POST['update_product']))
 include("includes/header.php");
 
 ?>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
 <div class="container py-5">
 

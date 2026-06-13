@@ -27,6 +27,11 @@ if(mysqli_num_rows($productQuery) == 0)
 $product = mysqli_fetch_assoc($productQuery);
 
 //cart section 
+if($product['stock'] <= 0)
+{
+    echo "<script>alert('Out of Stock'); window.location='products.php';</script>";
+    exit();
+}
 
 
 $message = "";
@@ -82,6 +87,10 @@ if(isset($_POST['add_to_cart']))
 
 
 ?>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
 <div class="container py-5">
 

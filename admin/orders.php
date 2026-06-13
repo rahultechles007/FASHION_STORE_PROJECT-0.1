@@ -18,6 +18,9 @@ $result = mysqli_query($conn, "
 ");
 
 ?>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
 <div class="container py-5">
 

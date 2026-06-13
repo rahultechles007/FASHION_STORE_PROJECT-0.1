@@ -14,10 +14,10 @@ $message = "";
 /* ADD PRODUCT */
 if(isset($_POST['add_product']))
 {
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $product_name = mysqli_real_escape_string($conn, $_POST['product_name']);
     $price = $_POST['price'];
     $description = mysqli_real_escape_string($conn, $_POST['description']);
-
+    $stock = $_POST['stock'];// stocked is added
     // IMAGE UPLOAD
     $image = $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];
@@ -36,9 +36,8 @@ if(isset($_POST['add_product']))
     if(move_uploaded_file($tmp_name, $upload_folder . $image_name))
     {
         $query = mysqli_query($conn,
-            "INSERT INTO products (name, price, description, image)
-            VALUES ('$name', '$price', '$description', '$image_name')"
-        );
+       "INSERT INTO products(product_name, price, description, image, stock)
+        VALUES('$product_name', '$price', '$description', '$image_name', '$stock')");
 
         if($query)
         {
@@ -68,7 +67,9 @@ include("includes/header.php");
             <?php echo $message; ?>
         </div>
     <?php } ?>
-
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
     <div class="card shadow border-0">
 
         <div class="card-body">
@@ -77,7 +78,7 @@ include("includes/header.php");
 
                 <div class="mb-3">
                     <label class="form-label">Product Name</label>
-                    <input type="text" name="name" class="form-control" required>
+                    <input type="text" name="product_name" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
@@ -93,6 +94,11 @@ include("includes/header.php");
                 <div class="mb-3">
                     <label class="form-label">Product Image</label>
                     <input type="file" name="image" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Stock Quantity</label>
+                    <input type="number" name="stock" class="form-control" required>
                 </div>
 
                 <button type="submit" name="add_product" class="btn btn-success">

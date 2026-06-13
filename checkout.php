@@ -30,6 +30,7 @@ $user_id = $_SESSION['user_id'];
     );
 
     $total_amount = 0;
+    
 
     $cartQuery = mysqli_query(
         $conn,
@@ -46,7 +47,7 @@ $user_id = $_SESSION['user_id'];
         $total_amount +=
             $item['price'] * $item['quantity'];
     }
-
+$grand_total = $total;
     mysqli_query(
         $conn,
         "INSERT INTO orders
@@ -66,7 +67,23 @@ $user_id = $_SESSION['user_id'];
             '$address'
         )"
     );
+$order_id = mysqli_insert_id($conn);
+$total_amount = $grand_total;
 
+$to = $_SESSION['email'];
+
+include("config/mail.php");
+
+$subject = "Order Confirmation - Fashion Store";
+
+$message = "
+<h3>Thank you for your order!</h3>
+<p><b>Order ID:</b> $order_id</p>
+<p><b>Total:</b> ₹$total_amount</p>
+<p>Status: Pending</p>
+";
+
+sendMail($to, $subject, $message);
     $order_id = mysqli_insert_id($conn);
 
     $cartQuery = mysqli_query(
@@ -98,6 +115,14 @@ $user_id = $_SESSION['user_id'];
                 '{$item['price']}'
             )"
         );
+        // ADD THIS STOCK UPDATE HERE
+         mysqli_query(
+        $conn,
+        "UPDATE products
+         SET stock = stock - {$item['quantity']}
+         WHERE product_id = {$item['product_id']}
+         AND stock >= {$item['quantity']}"
+    );
     }
 
     mysqli_query(
@@ -128,8 +153,12 @@ $cartItems = mysqli_query(
      WHERE cart.user_id='$user_id'"
 );
 
-?>
 
+
+?>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <!-- this is the layout in which checkout layout is done -->
  <div class="container py-5">
 

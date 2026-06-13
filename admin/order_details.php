@@ -42,7 +42,9 @@ $items = mysqli_query($conn, "
 <?php }
 
 ?>
-
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <div class="container py-5">
 
     <h2 class="mb-4">Order #<?php echo $order_id; ?></h2>
@@ -72,6 +74,11 @@ $items = mysqli_query($conn, "
                class="btn btn-success btn-sm">
                 Mark Delivered
             </a>
+       <!--invoice.php-->
+            <a href="../invoice.php?order_id=<?php echo $order_id; ?>"
+            class="btn btn-dark btn-sm">
+            View Invoice
+             </a>
 
         </div>
 

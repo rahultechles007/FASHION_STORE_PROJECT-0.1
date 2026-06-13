@@ -123,3 +123,19 @@ body{
 .product-card:hover{
     transform:translateY(-8px);
 }
+/*Improve buttons on mobile*/
+.btn {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* landing page */
+.category-card {
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    background: #f8f9fa;
+}
