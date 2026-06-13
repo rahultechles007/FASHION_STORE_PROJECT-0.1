@@ -1,0 +1,125 @@
+:root{
+    --primary-gold:#C8A96B;
+    --light-beige:#F5F2EB;
+    --cream:#EEE8DD;
+    --premium-black:#1E1A17;
+    --gray-text:#6B7280;
+    --white:#FFFFFF;
+    --border:#E5E7EB;
+}
+
+body{
+    background:var(--light-beige);
+    color:var(--premium-black);
+    font-family:'Segoe UI',sans-serif;
+}
+
+.navbar-brand{
+    color:var(--primary-gold)!important;
+}
+
+.btn-gold{
+    background:var(--primary-gold);
+    color:white;
+    border:none;
+}
+
+.btn-gold:hover{
+    transform:translateY(-2px);
+    transition:.3s;
+}
+
+.card{
+    border:none;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(0,0,0,.1);
+}
+
+.footer-section{
+    background:white;
+    border-top:1px solid var(--border);
+}
+
+.fade-up{
+    animation:fadeUp .8s ease;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+/* This the style section for register page */
+
+.card{
+    border-radius:20px;
+}
+
+.form-control{
+    border-radius:12px;
+}
+
+.btn-gold{
+    background:#C8A96B;
+    color:white;
+    font-weight:600;
+    padding:12px;
+}
+
+.btn-gold:hover{
+    background:#b79555;
+    color:white;
+}
+
+/* this is ection for product.php*/
+.product-card{
+    overflow:hidden;
+    transition:0.35s;
+}
+
+.product-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.12);
+}
+
+.product-card img{
+    transition:0.4s;
+}
+
+.product-card:hover img{
+    transform:scale(1.05);
+}
+
+/* this is section for product_datels.php*/
+
+.badge{
+    padding:10px 14px;
+    border-radius:20px;
+}
+
+.btn-gold{
+    transition:0.3s;
+}
+
+.btn-gold:hover{
+    transform:translateY(-2px);
+}
+
+.product-card{
+    transition:0.35s;
+}
+
+.product-card:hover{
+    transform:translateY(-8px);
+}
