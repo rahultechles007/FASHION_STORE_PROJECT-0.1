@@ -1,11 +1,6 @@
-<?php
-
-session_start();
-include("config/db.php");
-include("includes/header.php");
-
-?>
-
+<?php 
+include("config/db.php");      // MUST BE FIRST
+include("includes/header.php"); // SECOND?>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

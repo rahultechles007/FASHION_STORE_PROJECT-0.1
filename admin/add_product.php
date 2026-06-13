@@ -15,9 +15,9 @@ $message = "";
 if(isset($_POST['add_product']))
 {
     $product_name = mysqli_real_escape_string($conn, $_POST['product_name']);
-    $price = $_POST['price'];
+    $price = mysqli_real_escape_string($conn, $_POST['price']);
     $description = mysqli_real_escape_string($conn, $_POST['description']);
-    $stock = $_POST['stock'];// stocked is added
+    $stock = mysqli_real_escape_string($conn, $_POST['stock']);// stocked is added
     // IMAGE UPLOAD
     $image = $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];

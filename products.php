@@ -13,7 +13,7 @@ $sql = "SELECT * FROM products WHERE 1=1";
 ========================= */
 if(!empty($_GET['search']))
 {
-    $search = $_GET['search'];
+    $search = mysqli_real_escape_string($conn, $_GET['search']);
     $sql .= " AND product_name LIKE '%$search%'";
 }
 
@@ -22,8 +22,8 @@ if(!empty($_GET['search']))
 ========================= */
 if(!empty($_GET['min_price']) && !empty($_GET['max_price']))
 {
-    $min = $_GET['min_price'];
-    $max = $_GET['max_price'];
+    $min = (int)$_GET['min_price'];
+    $max = (int)$_GET['max_price'];
 
     $sql .= " AND price BETWEEN $min AND $max";
 }
@@ -56,7 +56,7 @@ else
 }
 
 /* =========================
-   FINAL QUERY EXECUTION
+   EXECUTE QUERY
 ========================= */
 $products = mysqli_query($conn, $sql);
 
@@ -68,34 +68,37 @@ $products = mysqli_query($conn, $sql);
 
 <div class="container py-5">
 
-    <div class="text-center mb-5">
+    <div class="text-center mb-4">
         <h1 class="fw-bold">Our Collection</h1>
-        <p class="text-secondary">Discover premium fashion products.</p>
+        <p class="text-muted">Discover premium fashion products</p>
     </div>
 
     <!-- =========================
-         SEARCH / FILTER FORM
+         FILTER FORM
     ========================== -->
     <form method="GET" class="mb-4">
 
         <div class="row g-2">
 
             <div class="col-md-4">
-                <input type="text" name="search"
+                <input type="text"
+                       name="search"
                        class="form-control"
                        placeholder="Search products..."
                        value="<?php echo $_GET['search'] ?? ''; ?>">
             </div>
 
             <div class="col-md-2">
-                <input type="number" name="min_price"
+                <input type="number"
+                       name="min_price"
                        class="form-control"
                        placeholder="Min Price"
                        value="<?php echo $_GET['min_price'] ?? ''; ?>">
             </div>
 
             <div class="col-md-2">
-                <input type="number" name="max_price"
+                <input type="number"
+                       name="max_price"
                        class="form-control"
                        placeholder="Max Price"
                        value="<?php echo $_GET['max_price'] ?? ''; ?>">
@@ -113,18 +116,18 @@ $products = mysqli_query($conn, $sql);
                 </select>
             </div>
 
-            <div class="col-md-2">
-                <label class="form-check">
+            <div class="col-md-2 d-flex align-items-center">
+                <label>
                     <input type="checkbox" name="stock"
                         <?php if(isset($_GET['stock'])) echo "checked"; ?>>
-                    In Stock
+                    In Stock Only
                 </label>
             </div>
 
         </div>
 
-        <button class="btn btn-primary mt-2">
-            Filter
+        <button class="btn btn-dark mt-3">
+            Apply Filters
         </button>
 
     </form>
@@ -137,46 +140,51 @@ $products = mysqli_query($conn, $sql);
         <?php if(mysqli_num_rows($products) > 0) { ?>
 
             <?php while($product = mysqli_fetch_assoc($products)) { ?>
-                
-                <div class="col-lg-3 col-md-6">
+
+                <div class="col-lg-3 col-md-6 col-6">
 
                     <div class="card h-100 shadow-sm border-0 product-card">
 
-                        <img
-                            src="assets/images/products/<?php echo $product['image']; ?>"
-                            class="card-img-top"
-                            style="height:300px;object-fit:cover;"
-                            alt="Product">
+                        <!-- IMAGE -->
+                        <img src="assets/images/products/<?php echo $product['image']; ?>"
+                             class="card-img-top"
+                             style="height:260px;object-fit:cover;">
 
-                        <div class="card-body">
+                        <div class="card-body text-center">
 
-                            <h5 class="fw-bold">
+                            <!-- NAME -->
+                            <h6 class="fw-bold">
                                 <?php echo $product['product_name']; ?>
-                            </h5>
+                            </h6>
 
-                            <p class="text-muted">
+                            <!-- CATEGORY -->
+                            <p class="text-muted small">
                                 <?php echo $product['category']; ?>
                             </p>
 
-                            <h5 class="text-warning">
+                            <!-- PRICE -->
+                            <h6 class="text-warning fw-bold">
                                 ₹<?php echo number_format($product['price']); ?>
-                            </h5>
+                            </h6>
 
+                            <!-- STOCK -->
                             <?php if($product['stock'] <= 0) { ?>
-                                <span class="badge bg-danger">Out of Stock</span>
+                                <span class="badge bg-danger mb-2">Out of Stock</span>
                             <?php } else { ?>
-                                <span class="badge bg-success">In Stock</span>
+                                <span class="badge bg-success mb-2">In Stock</span>
                             <?php } ?>
 
-                           <a href="product_details.php?id=<?php echo $row['product_id']; ?>" class="btn btn-dark btn-sm w-100 mb-1">
-    View
-</a>
+                            <!-- VIEW -->
+                            <a href="product_details.php?id=<?php echo $product['product_id']; ?>"
+                               class="btn btn-dark btn-sm w-100 mb-1">
+                                View
+                            </a>
 
-<a href="wishlist_add.php?id=<?php echo $row['product_id']; ?>"
-   class="btn btn-outline-danger btn-sm w-100">
-    Add to Wishlist
-</a>
-                            
+                            <!-- WISHLIST -->
+                            <a href="wishlist_add.php?id=<?php echo $product['product_id']; ?>"
+                               class="btn btn-outline-danger btn-sm w-100">
+                                Add to Wishlist
+                            </a>
 
                         </div>
 
@@ -188,7 +196,7 @@ $products = mysqli_query($conn, $sql);
 
         <?php } else { ?>
 
-            <div class="text-center">
+            <div class="text-center py-5">
                 <h5>No products found</h5>
             </div>
 

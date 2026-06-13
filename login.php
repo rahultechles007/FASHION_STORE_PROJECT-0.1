@@ -30,14 +30,21 @@ if(isset($_POST['login']))
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
 
-            header("Location: landing.php");
-            exit();
+            // REDIRECT LOGIC
+        if($user['role'] == 'admin')
+        {
+            header("Location: admin/dashboard.php");
         }
         else
         {
-            $message = "Invalid password.";
-            $messageType = "danger";
+            header("Location: landing.php");
         }
+        exit();
+    }
+    else
+    {
+        echo "Invalid login";
+    }
     }
     else
     {
@@ -45,6 +52,8 @@ if(isset($_POST['login']))
         $messageType = "danger";
     }
 }
+
+
 
 include("includes/header.php");
 
