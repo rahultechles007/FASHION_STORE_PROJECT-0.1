@@ -143,9 +143,17 @@ if(isset($conn) && isset($_SESSION['user_id']))
                         <li>
                             <a class="dropdown-item"
                                href="settings.php">
-                                Settings
+                                Setting 
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                       <button
+                          id="navbarDarkBtn"
+                         class="btn btn-dark btn-sm ms-2">
+                         Dark
+                        </button>
+                      </li>
 
                     </ul>
 

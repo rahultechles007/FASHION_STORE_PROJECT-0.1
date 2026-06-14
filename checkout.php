@@ -11,8 +11,9 @@ if(!isset($_SESSION['user_id']))
 
 $user_id = $_SESSION['user_id'];
 
-// Here to " adding order processing code is impportant process"
-    if(isset($_POST['place_order']))
+/* ========================= PLACE ORDER ========================= */
+
+if(isset($_POST['place_order']))
 {
     $customer_name = mysqli_real_escape_string(
         $conn,
@@ -30,7 +31,6 @@ $user_id = $_SESSION['user_id'];
     );
 
     $total_amount = 0;
-    
 
     $cartQuery = mysqli_query(
         $conn,
@@ -45,9 +45,10 @@ $user_id = $_SESSION['user_id'];
     while($item = mysqli_fetch_assoc($cartQuery))
     {
         $total_amount +=
-            $item['price'] * $item['quantity'];
+            $item['price'] *
+            $item['quantity'];
     }
-$grand_total = $total;
+
     mysqli_query(
         $conn,
         "INSERT INTO orders
@@ -67,23 +68,7 @@ $grand_total = $total;
             '$address'
         )"
     );
-$order_id = mysqli_insert_id($conn);
-$total_amount = $grand_total;
 
-$to = $_SESSION['email'];
-
-include("config/mail.php");
-
-$subject = "Order Confirmation - Fashion Store";
-
-$message = "
-<h3>Thank you for your order!</h3>
-<p><b>Order ID:</b> $order_id</p>
-<p><b>Total:</b> ₹$total_amount</p>
-<p>Status: Pending</p>
-";
-
-sendMail($to, $subject, $message);
     $order_id = mysqli_insert_id($conn);
 
     $cartQuery = mysqli_query(
@@ -115,14 +100,14 @@ sendMail($to, $subject, $message);
                 '{$item['price']}'
             )"
         );
-        // ADD THIS STOCK UPDATE HERE
-         mysqli_query(
-        $conn,
-        "UPDATE products
-         SET stock = stock - {$item['quantity']}
-         WHERE product_id = {$item['product_id']}
-         AND stock >= {$item['quantity']}"
-    );
+
+        mysqli_query(
+            $conn,
+            "UPDATE products
+             SET stock = stock - {$item['quantity']}
+             WHERE product_id = {$item['product_id']}
+             AND stock >= {$item['quantity']}"
+        );
     }
 
     mysqli_query(
@@ -134,11 +119,12 @@ sendMail($to, $subject, $message);
     header("Location: order_success.php?id=".$order_id);
     exit();
 }
-// ends here 
+
 include("includes/header.php");
-?>
-<!-- this main for load items -->
- <?php
+
+/* =========================
+   LOAD CART ITEMS
+========================= */
 
 $total = 0;
 
@@ -153,20 +139,17 @@ $cartItems = mysqli_query(
      WHERE cart.user_id='$user_id'"
 );
 
-
-
 ?>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<!-- this is the layout in which checkout layout is done -->
- <div class="container py-5">
+
+<div class="container py-5">
 
     <h1 class="fw-bold mb-4">
         Checkout
     </h1>
 
     <div class="row">
+
+        <!-- CUSTOMER DETAILS -->
 
         <div class="col-lg-7">
 
@@ -221,7 +204,7 @@ $cartItems = mysqli_query(
                         <button
                             type="submit"
                             name="place_order"
-                            class="btn btn-gold">
+                            class="btn btn-dark">
 
                             Place Order
 
@@ -235,8 +218,7 @@ $cartItems = mysqli_query(
 
         </div>
 
-
-<!-- Here comes the order summary sections-->
+        <!-- ORDER SUMMARY -->
 
         <div class="col-lg-5">
 
@@ -251,26 +233,31 @@ $cartItems = mysqli_query(
                     <?php while($item = mysqli_fetch_assoc($cartItems)) {
 
                         $subtotal =
-                            $item['price'] *
-                            $item['quantity'];
+                        $item['price'] *
+                        $item['quantity'];
 
                         $total += $subtotal;
-
                     ?>
 
-                        <div class="d-flex justify-content-between mb-2">
+                    <div class="d-flex justify-content-between mb-2">
 
-                            <span>
-                                <?php echo $item['product_name']; ?>
-                                ×
-                                <?php echo $item['quantity']; ?>
-                            </span>
+                        <span>
 
-                            <span>
-                                ₹<?php echo number_format($subtotal); ?>
-                            </span>
+                            <?php echo $item['product_name']; ?>
 
-                        </div>
+                            ×
+
+                            <?php echo $item['quantity']; ?>
+
+                        </span>
+
+                        <span>
+
+                            ₹<?php echo number_format($subtotal); ?>
+
+                        </span>
+
+                    </div>
 
                     <?php } ?>
 
@@ -281,8 +268,36 @@ $cartItems = mysqli_query(
                         <strong>Total</strong>
 
                         <strong>
+
                             ₹<?php echo number_format($total); ?>
+
                         </strong>
+
+                    </div>
+
+                    <hr>
+
+                    <!-- OFFERS -->
+
+                    <div class="alert alert-success mt-3">
+
+                        <h6 class="fw-bold mb-2">
+                            Special Offers
+                        </h6>
+
+                        <p class="mb-1">
+                            Use <strong>VELORA10</strong>
+                            and get 10% OFF on your next order.
+                        </p>
+
+                        <p class="mb-1">
+                            Use <strong>NEWUSER20</strong>
+                            and get ₹200 OFF above ₹1999.
+                        </p>
+
+                        <p class="mb-0">
+                            Free Shipping on orders above ₹2999.
+                        </p>
 
                     </div>
 
@@ -295,3 +310,4 @@ $cartItems = mysqli_query(
     </div>
 
 </div>
+

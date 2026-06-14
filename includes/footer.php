@@ -1,3 +1,5 @@
+
+
 <footer class="bg-white border-top mt-5">
 
     <div class="container py-5">
@@ -158,7 +160,7 @@
         <span>Shop</span>
     </a>
 
-    <a href="orders.php" class="mobile-nav-item">
+    <a href="my_orders.php" class="mobile-nav-item">
         <i class="fa-solid fa-box"></i>
         <span>Orders</span>
     </a>
@@ -231,7 +233,58 @@
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="/fashion/assets/js/script.js"></script>
 
 </body>
+<!-- Dark Mode for  webpage -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    let toggle =
+    document.getElementById("darkModeToggle");
+
+    /* Load saved mode */
+    if(localStorage.getItem("darkMode") === "enabled")
+    {
+        document.body.classList.add("dark-mode");
+
+        if(toggle)
+        {
+            toggle.checked = true;
+        }
+    }
+
+    /* Toggle */
+    if(toggle)
+    {
+        toggle.addEventListener("change", function(){
+
+            if(this.checked)
+            {
+                document.body.classList.add("dark-mode");
+
+                localStorage.setItem(
+                    "darkMode",
+                    "enabled"
+                );
+            }
+            else
+            {
+                document.body.classList.remove("dark-mode");
+
+                localStorage.setItem(
+                    "darkMode",
+                    "disabled"
+                );
+            }
+
+        });
+    }
+
+});
+
+</script>
+
 </html>

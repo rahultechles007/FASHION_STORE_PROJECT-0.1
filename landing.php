@@ -39,47 +39,93 @@ include("includes/header.php"); // SECOND?>
     
 
 <!-- ========================= HERO SLIDER (NEW) ========================= -->
-<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+<!-- HERO SLIDER -->
+<section class="container mt-4">
 
-    <div class="carousel-inner">
+    <div id="heroCarousel"
+         class="carousel slide shadow rounded overflow-hidden"
+         data-bs-ride="carousel">
 
-        <div class="carousel-item active">
-            <img src="assets/images/slider1.png" class="d-block w-100" style="height:500px; object-fit:cover;">
-            <div class="carousel-caption">
-                <h1 class="fw-bold">Elevate Your Style</h1>
-                <p>Premium fashion for men, women & kids</p>
-                <a href="products.php" class="btn btn-warning">Shop Now</a>
+        <div class="carousel-inner">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+
+                <img src="assets/images/slider1.jpg"
+                     class="d-block w-100 slider-img"
+                     alt="Luxury Fashion">
+
+                <div class="carousel-caption">
+                    <h1 class="fw-bold">Elevate Your Style</h1>
+                    <p>Premium fashion for men, women & kids</p>
+                    <a href="products.php"
+                       class="btn btn-warning">
+                        Shop Now
+                    </a>
+                </div>
+
             </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+
+                <img src="assets/images/slider2.jpg"
+                     class="d-block w-100 slider-img"
+                     alt="New Arrivals">
+
+                <div class="carousel-caption">
+                    <h1 class="fw-bold">New Arrivals</h1>
+                    <p>Fresh fashion collection just arrived</p>
+                    <a href="products.php"
+                       class="btn btn-warning">
+                        Shop Now
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+
+                <img src="assets/images/slider3.jpg"
+                     class="d-block w-100 slider-img"
+                     alt="Mega Sale">
+
+                <div class="carousel-caption">
+                    <h1 class="fw-bold">Big Sale Live</h1>
+                    <p>Up to 50% OFF limited time</p>
+                    <a href="products.php"
+                       class="btn btn-warning">
+                        Shop Now
+                    </a>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="carousel-item">
-            <img src="assets/images/slider2.jpg" class="d-block w-100" style="height:500px; object-fit:cover;">
-            <div class="carousel-caption">
-                <h1>New Arrivals</h1>
-                <p>Fresh fashion collection just arrived</p>
-            </div>
-        </div>
+        <!-- Controls -->
+        <button class="carousel-control-prev"
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide="prev">
 
-        <div class="carousel-item">
-            <img src="assets/images/slider3.jpg" class="d-block w-100" style="height:500px; object-fit:cover;">
-            <div class="carousel-caption">
-                <h1>Big Sale Live</h1>
-                <p>Up to 50% OFF limited time</p>
-            </div>
-        </div>
+            <span class="carousel-control-prev-icon"></span>
+
+        </button>
+
+        <button class="carousel-control-next"
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide="next">
+
+            <span class="carousel-control-next-icon"></span>
+
+        </button>
 
     </div>
 
-    <button class="carousel-control-prev" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-
-    <button class="carousel-control-next" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-
-</div>
-
+</section>
 <!-- ========================= CATEGORY SECTION (UPGRADED  ========================= -->
 <section class="container py-5">
 
@@ -264,3 +310,4 @@ $(document).ready(function(){
 });
 </script>
 <?php include("includes/footer.php"); ?>
+
