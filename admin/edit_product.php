@@ -1,6 +1,8 @@
 <?php
 
 session_start();
+include("auth.php");
+include("../includes/session_timeout.php");
 include(__DIR__ . "/../config/db.php");
 
 if(!isset($_SESSION['admin_id']))

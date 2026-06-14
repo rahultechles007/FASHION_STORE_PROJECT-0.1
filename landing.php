@@ -44,7 +44,7 @@ include("includes/header.php"); // SECOND?>
     <div class="carousel-inner">
 
         <div class="carousel-item active">
-            <img src="assets/images/slider1.jpg" class="d-block w-100" style="height:500px; object-fit:cover;">
+            <img src="assets/images/slider1.png" class="d-block w-100" style="height:500px; object-fit:cover;">
             <div class="carousel-caption">
                 <h1 class="fw-bold">Elevate Your Style</h1>
                 <p>Premium fashion for men, women & kids</p>

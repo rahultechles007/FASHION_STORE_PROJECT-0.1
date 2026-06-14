@@ -63,8 +63,6 @@ if(isset($_POST['register']))
     }
 }
 
-include("includes/header.php");
-
 ?>
 
 

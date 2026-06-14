@@ -1,10 +1,11 @@
 <?php
 
 session_start();
+include("auth.php");
 include(__DIR__ . "/../config/db.php");
+include("../includes/session_timeout.php");
 
-if(!isset($_SESSION['admin_id']))
-{
+if(!isset($_SESSION['admin_id'])){
     header("Location: admin_login.php");
     exit();
 }
