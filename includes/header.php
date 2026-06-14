@@ -220,7 +220,7 @@ if(isset($_SESSION['user_id']))
                                 Settings
                             </a>
                         </li>
-                        
+
 
                     </ul>
 
@@ -276,7 +276,7 @@ if(isset($_SESSION['user_id']))
 
                     <li class="nav-item">
 
-                        <a class="nav-link"
+                        <a class="btn btn-dark ms-lg-2 nav-link"
                            href="login.php">
 
                             Login

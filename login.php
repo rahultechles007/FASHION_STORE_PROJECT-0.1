@@ -58,12 +58,13 @@ if(isset($_POST['login']))
         $error = "User Not Found";
     }
 }
-?>
-
-
 include("includes/header.php");
-
 ?>
+
+
+
+
+
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
