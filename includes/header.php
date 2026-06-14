@@ -1,5 +1,5 @@
 <?php
-include_once("config/db.php");
+
 include_once("includes/header.php");
 
 if(session_status() === PHP_SESSION_NONE)
@@ -7,28 +7,33 @@ if(session_status() === PHP_SESSION_NONE)
     session_start();
 }
 
+include_once(__DIR__ . "/../config/db.php");
 $darkMode = 0;
 
 if(isset($_SESSION['user_id']))
-
 {
     $uid = $_SESSION['user_id'];
 
-    $q = mysqli_query($conn,
+    $q = mysqli_query(
+        $conn,
+        "SELECT dark_mode
+         FROM user_settings
+         WHERE user_id='$uid'"
+    );
 
-    "SELECT dark_mode FROM user_settings WHERE user_id='$uid'");
-
-    $d = mysqli_fetch_assoc($q);
-
-    $darkMode = $d['dark_mode'] ?? 0;
-
+    if($q && mysqli_num_rows($q) > 0)
+    {
+        $d = mysqli_fetch_assoc($q);
+        $darkMode = $d['dark_mode'] ?? 0;
+    }
 }
 
 
 
+/* CART COUNT */
 $cartCount = 0;
 
-if(isset($conn) && isset($_SESSION['user_id']))
+if(isset($_SESSION['user_id']))
 {
     $uid = $_SESSION['user_id'];
 
@@ -60,6 +65,9 @@ if(isset($conn) && isset($_SESSION['user_id']))
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <title>Modern Fashion Store</title>
 
 
@@ -69,6 +77,38 @@ if(isset($conn) && isset($_SESSION['user_id']))
 <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
+<style>
+
+.brand-logo{
+    font-size:2rem;
+    font-weight:700;
+    letter-spacing:2px;
+    color:#111;
+}
+
+.brand-logo i{
+    color:#d4af37;
+    margin-right:8px;
+}
+
+.brand-logo span{
+    color:#d4af37;
+}
+
+.navbar{
+    background:#fff !important;
+}
+
+.nav-link{
+    font-weight:500;
+}
+
+.admin-link{
+    color:#dc3545 !important;
+    font-weight:700;
+}
+</style>
+
 <body>
     
 
@@ -111,6 +151,26 @@ if(isset($conn) && isset($_SESSION['user_id']))
                         Products
                     </a>
                 </li>
+                
+ <!-- ADMIN PANEL -->
+
+                <?php if(
+                    isset($_SESSION['role']) &&
+                    $_SESSION['role'] == 'admin'
+                ) { ?>
+
+                <li class="nav-item">
+
+                    <a class="nav-link admin-link"
+                       href="admin/dashboard.php">
+
+                        Admin Panel
+
+                    </a>
+
+                </li>
+
+                <?php } ?>
 
                 <!-- ACCOUNT DROPDOWN -->
                 <li class="nav-item dropdown">
@@ -146,14 +206,21 @@ if(isset($conn) && isset($_SESSION['user_id']))
                                 Setting 
                             </a>
                         </li>
+                        
+                         <li>
+                            <a class="dropdown-item"
+                               href="my_orders.php">
+                                My Orders
+                            </a>
+                        </li>
 
-                        <li class="nav-item">
-                       <button
-                          id="navbarDarkBtn"
-                         class="btn btn-dark btn-sm ms-2">
-                         Dark
-                        </button>
-                      </li>
+                        <li>
+                            <a class="dropdown-item"
+                               href="settings.php">
+                                Settings
+                            </a>
+                        </li>
+                        
 
                     </ul>
 

@@ -3,56 +3,62 @@
 session_start();
 include("config/db.php");
 
-
-
-$message = "";
-$messageType = "";
-
 if(isset($_POST['login']))
 {
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-
-    // Find user by email
-    $query = mysqli_query(
+    $email = mysqli_real_escape_string(
         $conn,
-        "SELECT * FROM users WHERE email='$email'"
+        $_POST['email']
     );
 
-    if(mysqli_num_rows($query) == 1)
+    $password = $_POST['password'];
+
+    $query = mysqli_query(
+        $conn,
+        "SELECT * FROM users
+         WHERE email='$email'"
+    );
+
+    if(mysqli_num_rows($query) > 0)
     {
         $user = mysqli_fetch_assoc($query);
 
-        // Verify password
         if(password_verify($password, $user['password']))
         {
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['user_name'] = $user['name'];
-            $_SESSION['user_email'] = $user['email'];
+            $_SESSION['user_id'] =
+            $user['user_id'];
 
-            // REDIRECT LOGIC
-        if($user['role'] == 'admin')
-        {
-            header("Location: admin/dashboard.php");
+            $_SESSION['user_name'] =
+            $user['name'];
+
+            $_SESSION['role'] =
+            $user['role'];
+
+            if($user['role'] == 'admin')
+            {
+                header(
+                "Location: admin/dashboard.php"
+                );
+            }
+            else
+            {
+                header(
+                "Location: landing.php"
+                );
+            }
+
+            exit();
         }
         else
         {
-            header("Location: landing.php");
+            $error = "Invalid Password";
         }
-        exit();
     }
     else
     {
-        echo "Invalid login";
-    }
-    }
-    else
-    {
-        $message = "Account not found.";
-        $messageType = "danger";
+        $error = "User Not Found";
     }
 }
-
+?>
 
 
 include("includes/header.php");
