@@ -19,7 +19,6 @@ echo json_encode(["status"=>"success"]);
 $("#darkToggle").on("change", function(){
 
     let dark = $(this).is(":checked") ? 1 : 0;
-
     $.post("update_settings.php",
     {dark_mode: dark},
     function(response){

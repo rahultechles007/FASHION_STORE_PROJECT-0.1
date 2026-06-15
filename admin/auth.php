@@ -7,7 +7,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != 'admin')
     exit();
 }
 
-$timeout = 900; // 15 minutes
+$timeout = 900; 
 
 if(isset($_SESSION['LAST_ACTIVITY']))
 {

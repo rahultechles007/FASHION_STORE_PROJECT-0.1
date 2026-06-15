@@ -43,7 +43,6 @@ $cartItems = mysqli_query(
      ON cart.product_id = products.product_id
      WHERE cart.user_id='$user_id'"
 );
-
 ?>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -80,7 +79,6 @@ $cartItems = mysqli_query(
                     $total += $subtotal;
 
                 ?>
-
                     <tr>
 
                         <td>
@@ -154,7 +152,6 @@ $cartItems = mysqli_query(
                     </h4>
 
                 </div>
-
                 <a
                     href="checkout.php"
                     class="btn btn-gold mt-3">

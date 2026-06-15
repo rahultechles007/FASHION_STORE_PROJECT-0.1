@@ -3,23 +3,17 @@
 include("config/db.php");
 include("includes/header.php");
 
-/* =========================
-   BASE QUERY
-========================= */
+/* =========================  BASE QUERY               ========================= */
 $sql = "SELECT * FROM products WHERE 1=1";
 
-/* =========================
-   SEARCH FILTER
-========================= */
+/* =========================                 SEARCH FILTER  ========================= */
 if(!empty($_GET['search']))
 {
     $search = mysqli_real_escape_string($conn, $_GET['search']);
     $sql .= " AND product_name LIKE '%$search%'";
 }
 
-/* =========================
-   PRICE FILTER
-========================= */
+/* ========================= PRICE FILTER     ========================= */
 if(!empty($_GET['min_price']) && !empty($_GET['max_price']))
 {
     $min = (int)$_GET['min_price'];
@@ -28,17 +22,13 @@ if(!empty($_GET['min_price']) && !empty($_GET['max_price']))
     $sql .= " AND price BETWEEN $min AND $max";
 }
 
-/* =========================
-   STOCK FILTER
-========================= */
+/* ========================= STOCK FILTER  ========================= */
 if(isset($_GET['stock']))
 {
     $sql .= " AND stock > 0";
 }
 
-/* =========================
-   SORT FILTER
-========================= */
+/* ========================= SORT FILTER  ========================= */
 if(!empty($_GET['sort']))
 {
     if($_GET['sort'] == "low")
@@ -55,9 +45,7 @@ else
     $sql .= " ORDER BY product_id DESC";
 }
 
-/* =========================
-   EXECUTE QUERY
-========================= */
+/* =========================                    EXECUTE QUERY========================= */
 $products = mysqli_query($conn, $sql);
 
 ?>
@@ -73,9 +61,7 @@ $products = mysqli_query($conn, $sql);
         <p class="text-muted">Discover premium fashion products</p>
     </div>
 
-    <!-- =========================
-         FILTER FORM
-    ========================== -->
+    <!-- ========================= FILTER FORM ========================== -->
     <form method="GET" class="mb-4">
 
         <div class="row g-2">
@@ -132,9 +118,7 @@ $products = mysqli_query($conn, $sql);
 
     </form>
 
-    <!-- =========================
-         PRODUCTS GRID
-    ========================== -->
+    <!-- =========================  PRODUCTS GRID ========================== -->
     <div class="row g-4">
 
         <?php if(mysqli_num_rows($products) > 0) { ?>
@@ -145,7 +129,7 @@ $products = mysqli_query($conn, $sql);
 
                     <div class="card h-100 shadow-sm border-0 product-card">
 
-                        <!-- IMAGE -->
+                        <!--===================================== IMAGE -->
                         <img src="assets/images/products/<?php echo $product['image']; ?>"
                              class="card-img-top"
                              style="height:260px;object-fit:cover;">
@@ -157,12 +141,12 @@ $products = mysqli_query($conn, $sql);
                                 <?php echo $product['product_name']; ?>
                             </h6>
 
-                            <!-- CATEGORY -->
+                            <!-- ===========================CATEGORY -->
                             <p class="text-muted small">
                                 <?php echo $product['category']; ?>
                             </p>
 
-                            <!-- PRICE -->
+                            <!-- PRICE=========================== -->
                             <h6 class="text-warning fw-bold">
                                 ₹<?php echo number_format($product['price']); ?>
                             </h6>
@@ -180,7 +164,7 @@ $products = mysqli_query($conn, $sql);
                                 View
                             </a>
 
-                            <!-- WISHLIST -->
+                            <!-- ====== WISHLIST ========= -->
                             <a href="wishlist_add.php?id=<?php echo $product['product_id']; ?>"
                                class="btn btn-outline-danger btn-sm w-100">
                                 Add to Wishlist

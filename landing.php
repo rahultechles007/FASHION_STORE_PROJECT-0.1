@@ -257,9 +257,7 @@ include("includes/header.php"); // SECOND?>
 
 </section>
 
-<!-- =========================
-     CTA SECTION
-========================= -->
+<!-- ========================= CTA SECTION ========================= -->
 <section class="container py-5">
 
     <div class="text-center p-5 bg-light rounded shadow-sm">

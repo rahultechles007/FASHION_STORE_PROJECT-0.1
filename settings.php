@@ -60,8 +60,7 @@ if(!isset($_SESSION['user_id']))
         </div>
 
         <div class="col-lg-9">
-
-            <!-- ACCOUNT -->
+            
             <div class="card shadow-sm border-0 mb-4" id="account">
 
                 <div class="card-body">
@@ -83,8 +82,6 @@ if(!isset($_SESSION['user_id']))
                 </div>
 
             </div>
-
-            <!-- APPEARANCE -->
              
             <div class="card shadow-sm border-0 mb-4">
     <div class="card-body">

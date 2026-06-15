@@ -10,33 +10,29 @@ if(!isset($_SESSION['admin_id'])){
     exit();
 }
 
-/* =========================
-   TOTAL PRODUCTS
-========================= */
+/* =========== TOTAL PRODUCTS  ========================= */
+
 $productQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM products");
 $productCount = mysqli_fetch_assoc($productQuery)['total'];
 
-/* =========================
-   TOTAL USERS
-========================= */
+/* ========================= TOTAL USERS ========= */
+
 $userQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users");
 $userCount = mysqli_fetch_assoc($userQuery)['total'];
 
-/* =========================
-   TOTAL ORDERS
-========================= */
+/* ======= TOTAL ORDERS  ========================= */
+
 $orderQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM orders");
 $orderCount = mysqli_fetch_assoc($orderQuery)['total'];
 
-/* =========================
-   TOTAL REVENUE
-========================= */
+/* ========================= TOTAL REVENUE   ========= */
+
 $revenueQuery = mysqli_query($conn, "SELECT SUM(total_amount) AS total FROM orders");
 $revenue = mysqli_fetch_assoc($revenueQuery)['total'] ?? 0;
 
-/* =========================
-   SALES CHART DATA
-========================= */
+/* ========================= SALES CHART DATA               ========================= */
+
+
 $salesQuery = mysqli_query($conn,
 "SELECT DATE(order_date) AS date,
  SUM(total_amount) AS total,
@@ -81,9 +77,7 @@ include("includes/header.php");
         Admin Dashboard
     </h2>
 
-    <!-- =========================
-         STATS CARDS
-    ========================== -->
+    <!-- =========================  STATS CARDS               ========================== -->
     <div class="row g-4">
 
         <div class="col-lg-3 col-md-6">
@@ -118,9 +112,7 @@ include("includes/header.php");
 
     </div>
 
-    <!-- =========================
-         CHART SECTION
-    ========================== -->
+    <!-- =========================CHART SECTION  ========================== -->
     <div class="card shadow border-0 mt-5">
 
         <div class="card-body">
@@ -147,9 +139,7 @@ include("includes/header.php");
 
 <?php include("includes/footer.php"); ?>
 
-<!-- =========================
-     CHART JS LOGIC
-========================= -->
+<!-- =========================  CHART JS LOGIC        ========================= -->
 <script>
 
 const labels = <?php echo json_encode($dates); ?>;

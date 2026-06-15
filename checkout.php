@@ -122,9 +122,7 @@ if(isset($_POST['place_order']))
 
 include("includes/header.php");
 
-/* =========================
-   LOAD CART ITEMS
-========================= */
+/* =========================  LOAD CART ITEMS ========================= */
 
 $total = 0;
 

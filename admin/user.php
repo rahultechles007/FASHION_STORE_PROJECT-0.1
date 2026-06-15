@@ -3,8 +3,6 @@
 include("auth.php");
 include("../config/db.php");
 include("includes/header.php");
-echo "DB Loaded";
-exit();
 
 $users = mysqli_query($conn,
 "SELECT * FROM users ORDER BY user_id DESC");
